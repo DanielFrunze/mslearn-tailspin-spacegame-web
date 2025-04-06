@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: Default
+  name: 'GitHub-CodeSapces-Poll'
 
 variables:
   buildConfiguration: 'Release'
