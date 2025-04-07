@@ -19,6 +19,15 @@ RUN cd /home/vscode/azure-pipelines \
     && tar xzf /home/vscode/azure-pipelines/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz \
     && /home/vscode/azure-pipelines/bin/installdependencies.sh
 
+RUN apt-get update && apt-get install -y \
+    wget \
+    ca-certificates \
+    curl \
+    && wget https://packages.microsoft.com/config/debian/11/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && apt-get update \
+    && apt-get install -y dotnet-sdk-6.0
+
 # copy over the start.sh script
 COPY scripts/start.sh /home/vscode/azure-pipelines/start.sh
 
