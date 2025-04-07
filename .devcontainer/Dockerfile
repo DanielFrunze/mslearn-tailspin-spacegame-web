@@ -28,6 +28,16 @@ RUN apt-get update && apt-get install -y \
     && apt-get update \
     && apt-get install -y dotnet-sdk-6.0
 
+# download and install node and npm
+ARG NODE_VERSION=18
+
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+    && apt-get install -y nodejs \
+    && node -v && npm -v
+    
+# Install Gulp globally
+RUN npm install -g gulp-cli
+
 # copy over the start.sh script
 COPY scripts/start.sh /home/vscode/azure-pipelines/start.sh
 
